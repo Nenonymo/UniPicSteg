@@ -1,10 +1,13 @@
-SRC = ./src/c
-INC = ./include
+SRC = ./SRC
+INC = ./Include
 
 TARGET = uniPicsteg
 
-OBJS = $(SRC)/processing.o \
-	   $(SRC)/main.o
+OBJS = 	$(SRC)/interface.o \
+		$(SRC)/random.o \
+		$(SRC)/noiseGen.o \
+		$(SRC)/processing.o \
+		$(SRC)/main.o
 
 CXX = g++
 

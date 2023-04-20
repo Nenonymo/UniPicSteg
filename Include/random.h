@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -17,4 +18,4 @@ class RandomGenerator
     private:
         unsigned int maxVal;
         const unsigned int seed;
-}
+};

@@ -1,16 +1,13 @@
+#pragma once
+
 #include <string>
-#include <opencv2/opencv.hpp>
+#include <stdint.h>
+
+#include "interface.h"
+#include "jobData.h"
+#include "random.h"
+#include "noiseGen.h"
 
 using namespace std;
 
-typedef struct jobData
-{
-    char* path;
-    unsigned int size[2];
-    unsigned int alpha;
-    char* data;
-    char* key;
-} jobData;
-
-
-char* process(jobData* data); //Returns path to modified picture
+unsigned int process(jobData* data, RandomGenerator* generator); //Returns signal for the process (0=success)

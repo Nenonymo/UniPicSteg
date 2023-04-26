@@ -10,19 +10,21 @@ unsigned int process(jobData* data, RandomGenerator* generator)
     data->dims[1] = srcPic.cols;
     data->size = data->dims[0]*data->dims[1];
 
+    cout << "Alpha = " << data->alpha << endl;
 
   //Noise picture
     cv::Mat dstPic = cv::Mat(srcPic.rows, srcPic.cols, CV_32FC1);
     srcPic.copyTo(dstPic);
     uint8_t* refChannels = generator->generateArray(data->size, 2);
-    //unsigned int res = noise(data->size, picture, refChannels, data->alpha, generator);
+    if (noise(dstPic, refChannels, data->alpha, generator))
+    {cerr<<"Error on the noising of the picture!"<<endl;}
 
 
   //Add data in the picture
 
 
   //export the picture
-    writePicture(srcPic, DATA_OU_PREF+data->path);
+    writePicture(dstPic, DATA_OU_PREF+data->path);
 
 
   //Cleaning

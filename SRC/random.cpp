@@ -16,6 +16,9 @@ void RandomGenerator::setMaxVal(unsigned int maxVal, unsigned int open)
 unsigned int RandomGenerator::generateRandInt()
 {return (rand()%this->maxVal); }
 
+unsigned int RandomGenerator::generateRandInt(unsigned int max)
+{return (rand()%(max+1)); }
+
 uint8_t* RandomGenerator::generateArray(unsigned int size, unsigned int maxVal)
 {
     uint8_t* array = new uint8_t[size];

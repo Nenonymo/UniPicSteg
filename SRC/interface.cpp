@@ -40,7 +40,9 @@ jobData* inputJobConsole()
     cin >> output->path;
 
     //Alpha
-    cin >> output->alpha;
+    unsigned int tmp;
+    cin >> tmp;
+    output->alpha = tmp;
 
     //Data
     cin >> output->data;

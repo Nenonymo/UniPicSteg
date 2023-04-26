@@ -10,6 +10,7 @@ class RandomGenerator
         ~RandomGenerator();
 
         unsigned int generateRandInt();
+        unsigned int generateRandInt(unsigned int maxVal);
         uint8_t* generateArray(unsigned int size, unsigned int max);
         uint8_t generateDifference(uint8_t aplha, uint8_t value);
 

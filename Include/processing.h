@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "interface.h"
+#include "fileSystem.h"
 #include "jobData.h"
 #include "random.h"
 #include "noiseGen.h"

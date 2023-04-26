@@ -4,6 +4,7 @@ INC = ./Include
 TARGET = uniPicsteg
 
 OBJS = 	$(SRC)/interface.o \
+		$(SRC)/fileSystem.o \
 		$(SRC)/random.o \
 		$(SRC)/noiseGen.o \
 		$(SRC)/processing.o \

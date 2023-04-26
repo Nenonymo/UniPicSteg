@@ -39,10 +39,6 @@ jobData* inputJobConsole()
     //First, the path to the picture
     cin >> output->path;
 
-    //Dimensions and size of the picture
-    cin >> output->dimensions[0] >> output->dimensions[1];
-    output->size = output->dimensions [0] * output->dimensions[1];
-
     //Alpha
     cin >> output->alpha;
 

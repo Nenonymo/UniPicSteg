@@ -21,6 +21,10 @@ unsigned int process(jobData* data, RandomGenerator* generator)
 
 
   //Add data in the picture
+    unsigned int* positions = generateRangeSample(data->key, data->size, 100);
+    for (int i = 0; i < 10; i++) {cout << positions[i] << " ";}
+    cout << endl;
+    highlightPixels(dstPic, 100, positions);
 
 
   //export the picture
@@ -28,6 +32,6 @@ unsigned int process(jobData* data, RandomGenerator* generator)
 
 
   //Cleaning
-    //delete data; //Will delete here when the creation of job data is automatic
+    delete[] positions;
     return 0;
 }

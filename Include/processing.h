@@ -3,6 +3,8 @@
 #include <string>
 #include <stdint.h>
 
+#include "picture.h"
+#include "encrypt.h"
 #include "interface.h"
 #include "fileSystem.h"
 #include "jobData.h"

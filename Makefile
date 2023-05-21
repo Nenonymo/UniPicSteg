@@ -3,7 +3,8 @@ INC = ./Include
 
 TARGET = uniPicsteg
 
-OBJS = 	$(SRC)/encrypt.o \
+OBJS = 	$(SRC)/encoding.o \
+		$(SRC)/encrypt.o \
 		$(SRC)/interface.o \
 		$(SRC)/fileSystem.o \
 		$(SRC)/random.o \

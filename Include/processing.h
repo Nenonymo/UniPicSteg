@@ -3,6 +3,7 @@
 #include <string>
 #include <stdint.h>
 
+#include "encoding.h"
 #include "picture.h"
 #include "encrypt.h"
 #include "interface.h"

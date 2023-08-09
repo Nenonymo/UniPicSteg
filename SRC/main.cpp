@@ -17,7 +17,9 @@ int main (int argc, char** argv)
     {   
         InsertJob* newjob = dynamic_cast<InsertJob*>(job);
         //printf("%s\n", insertProcess(newjob, generator).c_str());
-        test(newjob);
+        //test(newjob);
+        string output = insertProcess(newjob, generator).c_str();
+        cout << output << endl;
     }
     else if(job->mode==1)
     {

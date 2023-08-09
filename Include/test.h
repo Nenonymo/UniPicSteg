@@ -1,7 +1,14 @@
 #pragma once
-
-#include <string>
+#include <opencv2/opencv.hpp>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <stdint.h>
+#include <cstdlib>
+#include <ctime>
+
+
 
 #include "encoding.h"
 #include "picture.h"
@@ -12,6 +19,4 @@
 #include "noiseGen.h"
 #include "keyShaping.h"
 
-std::string insertProcess(InsertJob* data, RandomGenerator* generator); //Returns signal for the process (0=success)
-
-char* extractProcess(ExtractJob* data);
+void test(InsertJob* data);

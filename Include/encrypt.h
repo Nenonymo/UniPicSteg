@@ -1,4 +1,9 @@
 #pragma once
+
 #include <string>
 
-uint32_t* generateRangeSample(std::string key, unsigned int rangeSize, unsigned int sampleSize);
+#include "fractal.h"
+
+uint32_t* positionLattice(std::string key, uint rangeSize, uint sampleSize);
+
+uint32_t* generatePosition(uint32_t boundary, uint length, double seed[6]);

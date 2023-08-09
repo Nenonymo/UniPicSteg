@@ -27,7 +27,6 @@ int createPathIfNotExist(std::string &path)
 int rmFile(std::string &path)
 {remove(path.c_str()); return 0; }
 
-
 cv::Mat loadPicture(std::string path)
 {
     if (doesPathExist(path)==0) 
@@ -35,7 +34,6 @@ cv::Mat loadPicture(std::string path)
         std::cerr<<"Error, file not found."<<std::endl; 
         exit(0);
     }
-
     cv::Mat output = cv::imread(path.c_str(), cv::IMREAD_COLOR);
     return output;
 }
@@ -43,4 +41,9 @@ cv::Mat loadPicture(std::string path)
 bool writePicture(cv::Mat &img, std::string path)
 {
     return imwrite(path.c_str(), img);
+}
+
+std::string removeExtension(const std::string& filename) 
+{
+    return std::filesystem::path(filename).stem().string();
 }

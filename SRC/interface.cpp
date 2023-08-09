@@ -2,61 +2,58 @@
 
 using namespace std;
 
-
-/* Lots of issue to fix to make it work with a file
-jobData* inputJobStram(std::istream& inStream, std::ostream& outStream, std::ostream& errStream)
+Job* inputJobArg(uint argc, char** argv)
 {
-    jobData* output = new jobData;
-
-    string workString;
-
-    //First, the path to the picture
-    inStream >> workString;
-    output->path = workString.str();
-
-    //Dimensions and size of the picture
-    inStream >> output->dimensions[0] >> output->dimensions[1];
-    output->size = output->dimensions [0] * output->dimensions[1];
-
-    //Alpha
-    inStream >> output->alpha;
-
-    //Data
-    inStream >> workString;
-    output->data = workString.str();
-
-    //Key
-    inStream >> workString;
-    output->key = workString.str();
-
-    return output;
-}*/
-
-jobData* inputJobConsole()
-{
-    jobData* output = new jobData;
-
-    //First, the path to the picture
-    cin >> output->path;
-
-    //Alpha
-    unsigned int tmp;
-    cin >> tmp;
-    output->alpha = tmp;
-
-    //Data
-    cin >> output->data;
-
-    //Key
-    cin >> output->key;
-
-    return output;
+    if(argc<2) {cerr<<"Insufficient parameters"<<endl; std::exit(0); }
+    int mode = std::string(argv[1]) == "i" ? 0 : (std::string(argv[1]) == "e" ? 1 : -1);
+    if(mode==0) 
+    {return new InsertJob(argc, argv); }
+    else if(mode==1) 
+    {return new ExtractJob(argc, argv); }
+    else
+    {cerr<<"Unknown mode"<<endl; std::exit(0); }
 }
 
-void createImg(const char* name, unsigned int dims[2], uint8_t* array)
+InsertJob::InsertJob(uint argc, char** argv)
 {
-    FILE *fout = fopen(name, "wb");
-    fprintf(fout, "P6\n %s\n %d\n %d\n %d\n", "# no comment", dims[0], dims[1], 1);
-    fwrite(array, 3*sizeof(uint8_t), dims[0]*dims[1], fout);
-    fclose(fout);
+    if(argc<5) {cerr<<"Insufficient parameters"<<endl; std::exit(0); }
+    this->alpha=stoi(argv[4]);
+    this->data=std::string(argv[3]);
+    this->path=std::string(argv[2]);
+    this->mode=0;
+    if(argc>5) //If parameters are given
+    {
+        for(ushort i=5;i<argc;i++)
+        {
+            if(std::string(argv[i]).substr(0,2)=="-z") 
+            {this->seed[0]=std::stod(std::string(argv[i]).substr(2)); }
+            else if(std::string(argv[i]).substr(0,2)=="-a") 
+            {this->seed[1]=std::stod(std::string(argv[i]).substr(2)); }
+            else if(std::string(argv[i]).substr(0,2)=="-b") 
+            {this->seed[2]=std::stod(std::string(argv[i]).substr(2)); }
+            else if(std::string(argv[i]).substr(0,2)=="-c") 
+            {this->seed[3]=std::stod(std::string(argv[i]).substr(2)); }
+            else if(std::string(argv[i]).substr(0,2)=="-p") 
+            {this->seed[4]=std::stod(std::string(argv[i]).substr(2)); }
+            else if(std::string(argv[i]).substr(0,2)=="-w") 
+            {this->seed[5]=std::stod(std::string(argv[i]).substr(2)); }
+        }
+    }
 }
+
+ExtractJob::ExtractJob(uint argc, char** argv)
+{
+    if(argc<4) {cerr<<"Insufficient parameters"<<endl; std::exit(0); }
+    this->key=std::string(argv[3]);
+    this->path=std::string(argv[2]);
+    this->mode=1;
+}
+
+ExtractJob::~ExtractJob()
+{}
+
+InsertJob::~InsertJob()
+{}
+
+Job::~Job()
+{/*Nothing happening here*/}

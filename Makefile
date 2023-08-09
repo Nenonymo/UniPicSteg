@@ -1,9 +1,13 @@
 SRC = ./SRC
 INC = ./Include
+LIB = ./LIB
 
 TARGET = uniPicsteg
 
-OBJS = 	$(SRC)/encoding.o \
+OBJS = 	$(LIB)/base64.o \
+		$(SRC)/keyShaping.o \
+		$(SRC)/encoding.o \
+		$(SRC)/fractal.o \
 		$(SRC)/encrypt.o \
 		$(SRC)/interface.o \
 		$(SRC)/fileSystem.o \
@@ -11,13 +15,14 @@ OBJS = 	$(SRC)/encoding.o \
 		$(SRC)/picture.o \
 		$(SRC)/noiseGen.o \
 		$(SRC)/processing.o \
+		$(SRC)/test.o \
 		$(SRC)/main.o
 
 CXX = g++
 
 #Compiler flags
 DBFLAGS = -O3
-WFLAGS = -Wall -std=c++17 #Wall flag 
+WFLAGS = -Wall -std=c++17 -g #Wall flag 
 
 #OpenCV Flags
 CVFLAGS = `pkg-config --cflags opencv4`

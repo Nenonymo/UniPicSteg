@@ -30,11 +30,13 @@ void insertEncoded(cv::Mat &pic, uint size, uint32_t* positions, uint16_t* encod
     {
         uint8_t* diff=genDiff(encoded[i],pixBase);
         //Add the diff pattern to the picture
-        ref=std::max(std::min(255,*(picPtr+positions[i]*3)+alpha)-(2*alpha), 0) +alpha;
+        ref=std::max(std::min(255,*(picPtr+positions[i]*3+(i+2)%3)+alpha)-(2*alpha), 0) +alpha;
         for(uint8_t c=0;c<2;c++)
-        {*(picPtr+positions[i]*3+(c+(i%3))%3)=ref-alpha+diff[c]; }
+        {*(picPtr+positions[i]*3+(c+i)%3)=ref-alpha+diff[c]; }
+        //printf("(%d %d:%d,%d) ",(i+2)%3, ref, *(picPtr+positions[i]*3+(i)%3), *(picPtr+positions[i]*3+(i+1)%3));
         delete[] diff;
     }
+    //printf("\n");
 }
 
 uint16_t* grabEncoded(cv::Mat &pic, uint size, uint32_t* positions, uint8_t alpha)
@@ -47,7 +49,8 @@ uint16_t* grabEncoded(cv::Mat &pic, uint size, uint32_t* positions, uint8_t alph
     {
         ref=std::max(std::min(255,*(picPtr+positions[i]*3+(i+2)%3)+alpha)-(2*alpha),0)+alpha;
         output[i]=(*(picPtr+positions[i]*3+(i%3))+alpha-ref)*pixBase+(*(picPtr+positions[i]*3+(i+1)%3)+alpha-ref);
-        //printf("Pixel %ld: %d\n", i, output[i]);
+        //printf("(%d %d:%d,%d) ",(i+2)%3, ref, *(picPtr+positions[i]*3+(i)%3), *(picPtr+positions[i]*3+(i+1)%3));
     }
+    //printf("\n");
     return output;
 }
